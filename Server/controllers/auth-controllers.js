@@ -32,7 +32,7 @@ const register = async (req, res) => {
       userId: userCreated._id.toString(),
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
