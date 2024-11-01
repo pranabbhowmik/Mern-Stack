@@ -9,19 +9,15 @@ const home = async (req, res) => {
   }
 };
 
+// !! User registion method !!
 const register = async (req, res) => {
   try {
-    console.log(req.body);
     const { username, email, phone, password } = req.body;
 
     const userExist = await User.findOne({ email });
     if (userExist) {
       return res.status(400).json({ error: "Email already exists" });
     }
-
-    // // hashing password
-    // const salt_round = 10;
-    // const hashingPassword = await bcrypt.hash(password, salt_round);
 
     // create user
     const userCreated = await User.create({
@@ -30,10 +26,35 @@ const register = async (req, res) => {
       phone,
       password,
     });
-    res.status(200).json({ message: userCreated });
+    res.status(200).json({
+      message: userCreated,
+      token: await userCreated.generateToken(),
+      userId: userCreated._id.toString(),
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { home, register };
+// !! User Login Method !!
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ error: "Email not found" });
+    }
+    const isMatch = await user.isPasswordCorrect(password);
+    if (!isMatch) {
+      return res.status(400).json({ error: "Password not matched" });
+    }
+    res.status(200).json({
+      message: "Login Success",
+      token: await user.generateToken(),
+      userId: user._id.toString(),
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Server Error" });
+  }
+};
+module.exports = { home, register, login };
