@@ -9,6 +9,7 @@ import { Service } from "./pages/Service";
 import { Error } from "./pages/Error";
 import "./App.css";
 import { Navbar } from "./components/Navber";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
