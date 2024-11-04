@@ -29,8 +29,8 @@ export const Login = () => {
                 <img
                   src="../../public/images/login.png"
                   alt="Registion pictrure"
-                  width="500"
-                  height="500"
+                  width="300"
+                  height="300"
                 />
               </div>
               <div className="registration-form">

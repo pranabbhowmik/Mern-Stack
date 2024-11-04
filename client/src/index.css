@@ -237,7 +237,7 @@ a.active {
     justify-content: start;
     align-items: center;
     & img {
-      width: 80%;
+      width: 50%;
       height: auto;
     }
   }
@@ -256,8 +256,8 @@ a.active {
 
     & input,
     textarea {
-      width: 80%;
-      padding: 0.4rem 0.6rem;
+      width: 110%;
+      padding: 1rem 15rem;
     }
   }
 }
