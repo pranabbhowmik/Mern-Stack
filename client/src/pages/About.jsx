@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../store/auth";
 export const About = () => {
+  const user = useAuth();
+
   return (
     <>
       <main>
@@ -8,7 +11,7 @@ export const About = () => {
           <div className="container grid grid-two-cols">
             <div className="hero-content">
               {/* <p>We care to cure your Health</p> */}
-              <p>Welcome, user</p>
+              <p>Welcome, {user.user.username}</p>
               <h1>Why Choose Us? </h1>
               <p>
                 Expertise: Our team consists of experienced IT professionals who

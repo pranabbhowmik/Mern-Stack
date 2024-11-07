@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../store/auth";
 const URL = "http://localhost:3000/api/from/contact";
 export const Contact = () => {
   const [contact, setContact] = useState({
@@ -6,6 +7,17 @@ export const Contact = () => {
     email: "",
     message: "",
   });
+  const [userdata, setUserdata] = useState(true);
+  const user = useAuth();
+  if (userdata && user) {
+    setContact({
+      username: user.user.username,
+      email: user.user.email,
+      massage: "",
+    });
+    setUserdata(false);
+  }
+
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
