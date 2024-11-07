@@ -31,7 +31,6 @@ export const Register = () => {
         },
         body: JSON.stringify(user),
       });
-      console.log(response);
       if (response.ok) {
         // after registion generate the token in localstorage
         const res_data = await response.json();

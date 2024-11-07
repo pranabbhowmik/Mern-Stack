@@ -3,9 +3,18 @@ const router = express.Router();
 const authControllers = require("../controllers/auth-controllers");
 const signupSchema = require("../validator/user-validator");
 const validate = require("../middleware/validator");
+const authMiddleware = require("../middleware/auth-Middleware");
 
 router.route("/").get(authControllers.home);
+
+// !!Register Router😑 !!!
 router
   .route("/register")
   .post(validate(signupSchema), authControllers.register);
-router.route("/login").post(authControllers.login), (module.exports = router);
+
+//!!! login Router 😎!!!!
+router.route("/login").post(authControllers.login);
+// User Router 😊!!
+router.route("/user").get(authMiddleware, authControllers.user);
+
+module.exports = router;
