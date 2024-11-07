@@ -258,7 +258,7 @@ a.active {
     & input,
     textarea {
       width: 110%;
-      padding: 1rem 15rem;
+      padding: 1rem 2rem;
     }
   }
 }
