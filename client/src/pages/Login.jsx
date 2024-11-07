@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const URL = "http://localhost:3000/api/auth/login";
+import { useAuth } from "../store/auth";
 export const Login = () => {
+  const { storedtoken } = useAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -28,7 +30,10 @@ export const Login = () => {
         body: JSON.stringify(user),
       });
       if (response.ok) {
-        alert("Login Successfully");
+        // after Loging generate the token in localstorage
+        const res_data = await response.json();
+        storedtoken(res_data.token);
+
         setUser({
           email: "",
           password: "",
