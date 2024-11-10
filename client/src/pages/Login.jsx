@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const URL = "http://localhost:3000/api/auth/login";
 import { useAuth } from "../store/auth";
 export const Login = () => {
@@ -29,21 +30,29 @@ export const Login = () => {
         },
         body: JSON.stringify(user),
       });
+      const res_data = await response.json();
       if (response.ok) {
-        // after Loging generate the token in localstorage
-        const res_data = await response.json();
+        // After logging in, store the token in local storage
         storedtoken(res_data.token);
 
         setUser({
           email: "",
           password: "",
         });
+        toast.success("Login Successfully");
         navigate("/about");
+      } else {
+        // Show the exact message from the server in the toast
+        toast.error(res_data.message);
       }
     } catch (error) {
-      console.log("loging Error", error);
+      console.log("Login Error", error);
+      toast.error(
+        "An error occurred while logging in. Please try again later."
+      );
     }
   };
+
   return (
     <>
       <section>
