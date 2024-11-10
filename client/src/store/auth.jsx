@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const storedtoken = (serverToken) => {
     localStorage.setItem("token", serverToken);
     setToken(serverToken); // Update token state
+    userAuthentication(); // Fetch user data right after storing token
   };
 
   // Update isLogIn whenever token changes
