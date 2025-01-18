@@ -13,7 +13,7 @@ export const Adminlayout = () => {
             <ul>
               <li>
                 <FaUserAlt />
-                <NavLink to="users"> Admin</NavLink>
+                <NavLink to="users"> User</NavLink>
               </li>
               <li>
                 <MdContactPhone />

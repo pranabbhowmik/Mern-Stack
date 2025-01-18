@@ -5,12 +5,15 @@ const authMiddleware = async (req, res, next) => {
   if (!token) {
     return res.status(400).json({ message: "Token not provided" });
   }
+  // Assuming token is in the format "Bearer <jwtToken>, Removing the "Bearer" prefix"
+  const jwtToken = token.replace("Bearer", "").trim();
+  // console.log("token form auth middleware", jwtToken);
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
     const userData = await User.findOne({ email: decoded.email }).select({
       password: 0,
     });
-    console.log(userData);
+    // console.log(userData);
     // Attach user data to req
     req.user = userData;
     req.token = token;
